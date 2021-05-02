@@ -16,6 +16,8 @@ namespace WeatherForecasting
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            GlobalConfig.ConnectionString = Configuration["ConnectionStrings:SqlServer"];
+            GlobalConfig.ServerUrl = Configuration["ServerUrl"];
         }
 
         public IConfiguration Configuration { get; }

@@ -4,17 +4,16 @@ namespace WeatherForecasting.Models
 {
     public class SqlConnector
     {
-        private string _connectionString { get; set; }
         private SqlConnection _connection { get; set; }
         public SqlConnector()
         {
-            _connectionString = "Data Source=DESKTOP-OLB9BCQ;Initial Catalog=WeatherForecasting;Integrated Security=True";
-            _connection = new SqlConnection(_connectionString);
+            _connection = new SqlConnection(GlobalConfig.ConnectionString);
         }
         public SqlConnection GetConnection()
         {
-            if (_connection.State == System.Data.ConnectionState.Closed) {
-                _connection = new SqlConnection(_connectionString);
+            if (_connection.State == System.Data.ConnectionState.Closed)
+            {
+                _connection = new SqlConnection(GlobalConfig.ConnectionString);
             }
             return _connection;
         }

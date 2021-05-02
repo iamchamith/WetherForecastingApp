@@ -1,0 +1,55 @@
+﻿@model List<Forecast>
+<br /><br />
+<table width="100%">
+    <tr>
+        @foreach (var item in Model)
+        {
+            <td width="14%"><b>@item.ForecastDate.DayOfWeek.ToString()</b></td>
+        }
+    </tr>
+    <tr>
+        @foreach (var item in Model)
+        {
+            
+            <td  width="14%"><img src="~/images/@(item.WeatherType).png" /></td>
+        }
+    </tr>
+    <tr>
+        @foreach (var item in Model)
+        {
+        <td width="14%">@item.MinTemp °C | @item.MaxTemp °C</td>
+        }
+    </tr>
+</table>
+
+@*<table width="100%">
+    <tbody>
+        <tr>
+            <td width="14%">5/3/2021</td>
+            <td width="14%">5/4/2021</td>
+            <td width="14%">5/5/2021</td>
+            <td width="14%">5/6/2021</td>
+            <td width="14%">5/7/2021</td>
+            <td width="14%">5/8/2021</td>
+            <td width="14%">5/9/2021</td>
+        </tr>
+        <tr>
+            <td width="14%"><img src="/images/sunny.png"></td>
+            <td width="14%"><img src="/images/rainy.png"></td>
+            <td width="14%"><img src="/images/sunny.png"></td>
+            <td width="14%"><img src="/images/cloudy.png"></td>
+            <td width="14%"><img src="/images/rainy.png"></td>
+            <td width="14%"><img src="/images/cloudy.png"></td>
+            <td width="14%"><img src="/images/sunny.png"></td>
+        </tr>
+        <tr>
+            <td width="14%">11 | 25 </td>
+            <td width="14%">15 | 25 </td>
+            <td width="14%">11 | 25 </td>
+            <td width="14%">15 | 25 </td>
+            <td width="14%">11 | 25 </td>
+            <td width="14%">15 | 25 </td>
+            <td width="14%">11 | 25 </td>
+        </tr>
+    </tbody>
+</table>*@

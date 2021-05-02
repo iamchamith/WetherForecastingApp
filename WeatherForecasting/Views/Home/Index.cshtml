@@ -4,16 +4,27 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Weather Forecast</h1>
-    Current city 
-    <select>
-        @for (int i = 0; i < Model.Count; i++)
+    <h2 class="display-4">Forecast weather</h2>
+    Select a city
+    <select id="location" class="form-select mr-3">
+        @foreach (var item in Model)
         {
-            <option>@Model[i].Name</option>
+            <option value="@item.Id">@item.Name</option>
         }
-
-        
     </select>
-
-    <button> Show </button>
+    <button onclick="LoadForecastData()" class="btn btn-success  mr-3"> Show Forecast Data </button>
 </div>
+
+<div id="summary">
+    <!--content goes here-->
+</div>
+<script>
+
+    function LoadForecastData() {
+        var selectedLocationId = $('#location').val();
+        $.get("@GlobalConfig.ServerUrl/Home/GetForecastData?locationId=" + selectedLocationId, function (data, status) {
+            $("#summary").html(data);
+        });
+    }
+
+</script>

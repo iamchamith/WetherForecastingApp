@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using System;
 using System.Linq;
 using WeatherForecasting.Models;
 
@@ -13,19 +14,20 @@ namespace WeatherForecasting.Controllers
         {
             _connection = new SqlConnector().GetConnection();
         }
-        public IActionResult Index()
+        public ViewResult Index()
         {
-            var sql = "Select Id,Name from Locations";
+            var sql = "SELECT Id,Name FROM Locations";
             var locations = _connection.Query<Location>(sql).ToList();
             return View(locations);
         }
 
-
-        public IActionResult GetForcastData(int locationId) {
-
-            var sql = $"select * from forecast where LocationId = 1 and forecastDate >= '2021-05-03'";
+        [HttpGet]
+        public PartialViewResult GetForecastData(int locationId)
+        {
+            var sql = $"SELECT Id,ForecastDate,WeatherType,MinTemp,MaxTemp FROM forecast " +
+                $"WHERE LocationId = {locationId} AND forecastDate > '{DateTime.Today}'";
             var forecast = _connection.Query<Forecast>(sql).ToList();
-            return View(forecast);
+            return PartialView("GetForecastData", forecast);
         }
     }
 }
